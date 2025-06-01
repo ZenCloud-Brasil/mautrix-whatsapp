@@ -260,7 +260,7 @@ func (br *BridgeMain) Init() {
 		Name: "version",
 		Help: commands.HelpMeta{
 			Section:     commands.HelpSectionGeneral,
-			Description: "Get the bridge version.",
+			Description: "Obter a versão.",
 		},
 	})
 	if br.PostInit != nil {

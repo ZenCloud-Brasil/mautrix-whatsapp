@@ -95,7 +95,7 @@ func (fh *FullHandler) userHasRoomPermission(ce *Event) bool {
 	levels, err := ce.Bridge.Matrix.GetPowerLevels(ce.Ctx, ce.RoomID)
 	if err != nil {
 		ce.Log.Warn().Err(err).Msg("Failed to check room power levels")
-		ce.Reply("Failed to get room power levels to see if you're allowed to use that command")
+		ce.Reply("Falha ao obter os níveis de poder da sala para verificar se você tem permissão para usar esse comando.")
 		return false
 	}
 	return levels.GetUserLevel(ce.User.MXID) >= levels.GetEventLevel(fh.RequiresEventLevel)
@@ -103,15 +103,15 @@ func (fh *FullHandler) userHasRoomPermission(ce *Event) bool {
 
 func (fh *FullHandler) Run(ce *Event) {
 	if fh.RequiresAdmin && !ce.User.Permissions.Admin {
-		ce.Reply("That command is limited to bridge administrators.")
+		ce.Reply("Esse comando é restrito a administradores da ponte.")
 	} else if fh.RequiresLoginPermission && !ce.User.Permissions.Login {
-		ce.Reply("You do not have permissions to log into this bridge.")
+		ce.Reply("Você não tem permissão para fazer login nesta ponte.")
 	} else if fh.RequiresEventLevel.Type != "" && !ce.User.Permissions.Admin && !fh.userHasRoomPermission(ce) {
-		ce.Reply("That command requires room admin rights.")
+		ce.Reply("Esse comando requer direitos de administrador da sala.")
 	} else if fh.RequiresPortal && ce.Portal == nil {
-		ce.Reply("That command can only be ran in portal rooms.")
+		ce.Reply("Esse comando só pode ser executado em salas de portal.")
 	} else if fh.RequiresLogin && ce.User.GetDefaultLogin() == nil {
-		ce.Reply("That command requires you to be logged in.")
+		ce.Reply("Esse comando requer que você esteja logado.")
 	} else {
 		fh.Func(ce)
 	}
