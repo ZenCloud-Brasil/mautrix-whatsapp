@@ -151,8 +151,7 @@ func (br *Connector) Init(bridge *bridgev2.Bridge) {
 	br.Bot = br.AS.BotIntent()
 	br.Crypto = NewCryptoHelper(br)
 	br.Bridge.Commands.(*commands.Processor).AddHandlers(
-		CommandDiscardMegolmSession, CommandSetPowerLevel,
-		CommandLoginMatrix, CommandPingMatrix, CommandLogoutMatrix,
+		CommandDiscardMegolmSession, CommandSetPowerLevel
 	)
 	br.Provisioning = &ProvisioningAPI{br: br}
 	br.DoublePuppet = newDoublePuppetUtil(br)

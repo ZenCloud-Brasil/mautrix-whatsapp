@@ -29,7 +29,6 @@ var (
 
 	HelpSectionGeneral = HelpSection{"General", 0}
 	HelpSectionAuth    = HelpSection{"Authentication", 10}
-	HelpSectionChats   = HelpSection{"Starting and managing chats", 20}
 	HelpSectionAdmin   = HelpSection{"Administration", 50}
 )
 
@@ -103,15 +102,15 @@ func FormatHelp(ce *Event) string {
 
 	var prefixMsg string
 	if ce.RoomID == ce.User.ManagementRoom {
-		prefixMsg = "This is your management room: prefixing commands with `%s` is not required."
+		prefixMsg = "Esta é a sua sala de administração: prefixar comandos com `%s` não é necessário."
 	} else if ce.Portal != nil {
-		prefixMsg = "**This is a portal room**: you must always prefix commands with `%s`. Management commands will not be bridged."
+		prefixMsg = "**Esta é uma sala de portal**:você deve sempre prefixar os comandos com `%s`. Comandos de administração não serão redirecionados."
 	} else {
-		prefixMsg = "This is not your management room: prefixing commands with `%s` is required."
+		prefixMsg = "Esta não é a sua sala de administração: prefixar comandos com `%s` é obrigatório."
 	}
 	_, _ = fmt.Fprintf(&output, prefixMsg, ce.Bridge.Config.CommandPrefix)
 	output.WriteByte('\n')
-	output.WriteString("Parameters in [square brackets] are optional, while parameters in <angle brackets> are required.")
+	output.WriteString("Parâmetros entre [colchetes] são opcionais, enquanto parâmetros entre <sinais de menor e maior> são obrigatórios.")
 	output.WriteByte('\n')
 	output.WriteByte('\n')
 
@@ -136,6 +135,6 @@ var CommandHelp = &FullHandler{
 	Name: "help",
 	Help: HelpMeta{
 		Section:     HelpSectionGeneral,
-		Description: "Show this help message.",
+		Description: "Mostrar esta mensagem de ajuda.",
 	},
 }

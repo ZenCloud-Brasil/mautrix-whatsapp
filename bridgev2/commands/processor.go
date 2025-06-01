@@ -192,14 +192,14 @@ var CommandCancel = &FullHandler{
 			if state.Cancel != nil {
 				state.Cancel()
 			}
-			ce.Reply("%s cancelled.", action)
+			ce.Reply("%s Cancelado.", action)
 		} else {
-			ce.Reply("No ongoing command.")
+			ce.Reply("Nenhum comando em andamento.")
 		}
 	},
 	Name: "cancel",
 	Help: HelpMeta{
 		Section:     HelpSectionGeneral,
-		Description: "Cancel an ongoing action.",
+		Description: "Cancelar uma ação em andamento.",
 	},
 }
